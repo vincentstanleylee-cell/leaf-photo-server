@@ -1,0 +1,25 @@
+# Render "Blueprint": tells Render how to run the Leaf Photo server on the free plan.
+# The two secret values (sync: false) are typed into Render's page when you create the service;
+# they are never stored in this file.
+services:
+  - type: web
+    name: leaf-photo-server
+    runtime: docker
+    plan: free
+    region: oregon
+    healthCheckPath: /health
+    envVars:
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: APP_KEY
+        sync: false
+      - key: OPENAI_MODEL
+        value: gpt-6-luna
+      - key: OPENAI_REASONING_EFFORT
+        value: low
+      - key: RATE_PER_MINUTE
+        value: "6"
+      - key: RATE_PER_DAY
+        value: "60"
+      - key: DAILY_LIMIT
+        value: "300"
